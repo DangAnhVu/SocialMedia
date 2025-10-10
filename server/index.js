@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url); // Get the filename of the current module
@@ -36,3 +37,18 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage }); // tạo instance multer với cấu hình lưu trữ, khi nào cần upload file thì dùng biến upload
+
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 6001; // Sử dụng biến PORT từ file .env, nếu không có thì mặc định là 6001
+mongoose
+    .connect(process.env.MONGO_URI || "mongodb://localhost:27017/socialmedia")
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server Port: ${PORT}`)); // Khởi động server sau khi kết nối DB thành công
+    })
+    .catch((error) => console.log(`${error} did not connect`)); // In lỗi nếu kết nối DB thất bại
+
+/* ROUTES WITH FILES */
+app.post("/auth/register", upload.single("picture"), (req, res) => {}); // Route đăng ký người dùng với upload file ảnh
+
+/* ROUTES */
+app.use("/auth", authRoutes); // Sử dụng các route trong authRoutes cho đường dẫn /auth
