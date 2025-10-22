@@ -9,6 +9,7 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url); // Get the filename of the current module
@@ -52,3 +53,4 @@ app.post("/auth/register", upload.single("picture"), (req, res) => {}); // Route
 
 /* ROUTES */
 app.use("/auth", authRoutes); // Sử dụng các route trong authRoutes cho đường dẫn /auth
+app.use("/users", userRoutes); // Sử dụng các route trong userRoutes cho đường dẫn /users
