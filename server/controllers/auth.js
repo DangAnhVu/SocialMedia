@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { use } from "react";
 
 // Đăng ký người dùng
 export const register = async (req, res) => {
