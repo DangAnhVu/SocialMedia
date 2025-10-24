@@ -1,5 +1,4 @@
-import User from "../models/User";
-
+import User from "../models/User.js";
 // Lấy thông tin người dùng theo ID
 export const getUser = async (req, res) => {
     try {

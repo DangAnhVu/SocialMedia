@@ -3,16 +3,18 @@ import {
     getUser,
     getUserFriends,
     addRemoveFriend,
-} from "../controllers/users.js";
-import { veriryToken } from "../middleware/auth.js";
+} from "../controllers/user.js";
+import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
 // Lấy thông tin người dùng
-router.get("/:id", veriryToken, getUser);
+router.get("/:id", verifyToken, getUser);
 
 // Lấy danh sách bạn bè của người dùng
-router.get("/:id/friends", veriryToken, getUserFriends);
+router.get("/:id/friends", verifyToken, getUserFriends);
 
 // Thêm hoặc xóa bạn bè
-router.patch("/:id/:friendId", veriryToken, addRemoveFriend);
+router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
+
+export default router;
