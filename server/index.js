@@ -8,15 +8,6 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import { verifyToken } from "./middleware/auth.js";
-import { register } from "./controllers/auth.js";
-import { createPost } from "./controllers/post.js";
-import User from "./models/User.js";
-import Post from "./models/Post.js";
-import { users, posts } from "./data/data.js";
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/user.js";
-import postRoutes from "./routes/post.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url); // Get the filename of the current module
@@ -45,23 +36,3 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage }); // tạo instance multer với cấu hình lưu trữ, khi nào cần upload file thì dùng biến upload
-
-/* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001; // Sử dụng biến PORT từ file .env, nếu không có thì mặc định là 6001
-mongoose
-    .connect(process.env.MONGO_URI || "mongodb://localhost:27017/socialmedia")
-    .then(() => {
-        app.listen(PORT, () => console.log(`Server Port: ${PORT}`)); // Khởi động server sau khi kết nối DB thành công
-        /* ADD DATA ONE TIME */
-        User.insertMany(users); // Chèn dữ liệu mẫu người dùng vào DB (chạy 1 lần)
-        Post.insertMany(posts); // Chèn dữ liệu mẫu bài đăng vào DB (chạy 1 lần)
-    })
-    .catch((error) => console.log(`${error} did not connect`)); // In lỗi nếu kết nối DB thất bại
-
-/* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register); // Route đăng ký người dùng với upload file ảnh
-app.post("/posts", verifyToken, upload.single("picture"), createPost); // Route tạo bài đăng với upload file ảnh và xác thực token
-
-/* ROUTES */
-app.use("/auth", authRoutes); // Sử dụng các route trong authRoutes cho đường dẫn /auth
-app.use("/users", userRoutes); // Sử dụng các route trong userRoutes cho đường dẫn /users
