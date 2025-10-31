@@ -38,10 +38,10 @@ const Navbar = () => {
     const background = theme.palette.background.default;
     const primaryLight = theme.palette.primary.light;
     const alt = theme.palette.background.alt;
-
-    // const fullName = `${user.firstName} ${user.lastName}`; // Tên đầy đủ của user
-    const fullName = user ? `${user.firstName} ${user.lastName}` : "Guest"; // Tên đầy đủ của user hoặc "Guest" nếu user không tồn tại
-
+    const isAuth = Boolean(useSelector((state) => state.token)); // kiểm tra xem người dùng đã đăng nhập hay chưa
+    const fullName = user
+        ? `${user.firstName} ${user.lastName}`
+        : "Please Log In";
     return (
         <FlexBetween padding="1rem 6%" backgroundColor={alt}>
             <FlexBetween gap="1.75rem">
