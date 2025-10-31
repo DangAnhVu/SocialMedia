@@ -53,8 +53,8 @@ mongoose
     .then(() => {
         app.listen(PORT, () => console.log(`Server Port: ${PORT}`)); // Khởi động server sau khi kết nối DB thành công
         /* ADD DATA ONE TIME */
-        User.insertMany(users); // Chèn dữ liệu mẫu người dùng vào DB (chạy 1 lần)
-        Post.insertMany(posts); // Chèn dữ liệu mẫu bài đăng vào DB (chạy 1 lần)
+        // User.insertMany(users); // Chèn dữ liệu mẫu người dùng vào DB (chạy 1 lần)
+        // Post.insertMany(posts); // Chèn dữ liệu mẫu bài đăng vào DB (chạy 1 lần)
     })
     .catch((error) => console.log(`${error} did not connect`)); // In lỗi nếu kết nối DB thất bại
 
