@@ -196,6 +196,8 @@ const Form = () => {
                                 />
                                 <Box
                                     gridColumn="span 4"
+                                    p="1rem"
+                                    borderRadius="5px"
                                     border={`1px solid ${palette.neutral.medium}`}
                                 >
                                     <Dropzone
@@ -274,37 +276,37 @@ const Form = () => {
                             helperText={touched.password && errors.password} // Hiển thị thông báo lỗi
                             sx={{ gridColumn: "span 4" }}
                         ></TextField>
+                    </Box>
 
-                        {/* BUTTON SUBMIT */}
-                        <Box>
-                            <Button
-                                fullWidth
-                                type="submit"
-                                sx={{
-                                    m: "2rem 0",
-                                    p: "1rem",
-                                    backgroundColor: palette.primary.main,
-                                    color: palette.background.alt,
-                                    "&:hover": {
-                                        color: palette.primary.main,
-                                    },
-                                }}
-                            >
-                                {isLogin ? "LOGIN" : "REGISTER"}
-                            </Button>
-                            <Typography
-                                sx={{
-                                    cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                    setPageType(isLogin ? "register" : "login");
-                                }}
-                            >
-                                {isLogin
-                                    ? "Don't have an account? Sign up"
-                                    : "Already have an account? Log in"}
-                            </Typography>
-                        </Box>
+                    {/* BUTTON SUBMIT */}
+                    <Box>
+                        <Button
+                            fullWidth
+                            type="submit"
+                            sx={{
+                                m: "2rem 0",
+                                p: "1rem",
+                                backgroundColor: palette.primary.main,
+                                color: palette.background.alt,
+                                "&:hover": {
+                                    color: palette.primary.main,
+                                },
+                            }}
+                        >
+                            {isLogin ? "LOGIN" : "REGISTER"}
+                        </Button>
+                        <Typography
+                            sx={{
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                setPageType(isLogin ? "register" : "login");
+                            }}
+                        >
+                            {isLogin
+                                ? "Don't have an account? Sign up"
+                                : "Already have an account? Log in"}
+                        </Typography>
                     </Box>
                 </form>
             )}
